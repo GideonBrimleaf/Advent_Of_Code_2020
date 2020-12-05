@@ -1,5 +1,6 @@
 import day2.PasswordChecker
 import day1.ExpenseCalc
+import day3.tobogganTraversal
 import java.io.File
 import utils.cleansePassword
 
@@ -12,8 +13,8 @@ fun main(args: Array<String>) {
 
     val calculator = ExpenseCalc(expenseData)
 
-    println(calculator.calculate(2020, calculator.expenses))
-    println(calculator.calculateThrees(2020))
+    println("Day 1 Part 1 - " + calculator.calculate(2020, calculator.expenses))
+    println("Day 1 Part 2 - " + calculator.calculateThrees(2020))
 
     val passwordData = mutableListOf<Boolean>()
 
@@ -21,7 +22,7 @@ fun main(args: Array<String>) {
         passwordData.add(PasswordChecker(cleansePassword(it)).isValidPart1())
     }
 
-    println(passwordData.filter { result -> result }.size)
+    println("Day 2 Part 1 - " + passwordData.filter { result -> result }.size)
 
     val passwordDataPt2 = mutableListOf<Boolean>()
 
@@ -29,6 +30,25 @@ fun main(args: Array<String>) {
         passwordDataPt2.add(PasswordChecker(cleansePassword(it)).isValidPart2())
     }
 
-    println(passwordDataPt2.filter { result -> result }.size)
+    println("Day 2 Part 2 - " + passwordDataPt2.filter { result -> result }.size)
+
+    val tobogganTraversalPt1 = mutableListOf<String>()
+
+    File("./src/main/data/TreeMap.txt").forEachLine {
+        tobogganTraversalPt1.add(it)
+    }
+
+    println("Day 3 Part 1 - " + tobogganTraversal(tobogganTraversalPt1, 3, 1))
+
+    val tobogganTraversalPt2 : Long =
+        tobogganTraversal(tobogganTraversalPt1, 1,1) *
+            tobogganTraversal(tobogganTraversalPt1, 3,1) *
+            tobogganTraversal(tobogganTraversalPt1, 5, 1) *
+            tobogganTraversal(tobogganTraversalPt1, 7, 1) *
+            tobogganTraversal(tobogganTraversalPt1, 1, 2).toLong()
+
+    println("Day 3 Part 2 - $tobogganTraversalPt2")
+
+
 
 }
