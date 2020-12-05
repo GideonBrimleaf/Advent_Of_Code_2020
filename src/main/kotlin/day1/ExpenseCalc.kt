@@ -1,4 +1,4 @@
-import kotlin.math.exp
+package day1
 
 class ExpenseCalc(val expenses : MutableList<Int>) {
     fun calculate(target: Int, listToIterate : MutableList<Int>): Int {

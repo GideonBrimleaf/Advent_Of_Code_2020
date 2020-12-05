@@ -1,3 +1,4 @@
+import day1.ExpenseCalc
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

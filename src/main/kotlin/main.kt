@@ -1,3 +1,5 @@
+import day2.PasswordChecker
+import day1.ExpenseCalc
 import java.io.File
 import utils.cleansePassword
 
@@ -16,9 +18,17 @@ fun main(args: Array<String>) {
     val passwordData = mutableListOf<Boolean>()
 
     File("./src/main/data/Passwords.txt").forEachLine {
-        passwordData.add(PasswordChecker(cleansePassword(it)).isValid())
+        passwordData.add(PasswordChecker(cleansePassword(it)).isValidPart1())
     }
 
     println(passwordData.filter { result -> result }.size)
+
+    val passwordDataPt2 = mutableListOf<Boolean>()
+
+    File("./src/main/data/Passwords.txt").forEachLine {
+        passwordDataPt2.add(PasswordChecker(cleansePassword(it)).isValidPart2())
+    }
+
+    println(passwordDataPt2.filter { result -> result }.size)
 
 }
