@@ -1,22 +1,29 @@
-class PasswordChecker(val minimumQty: Int, val maximumQty : Int, val character : Char, val password : String) {
+class PasswordChecker(private var minimumQty: Int, private var maximumQty : Int, private var character : Char, private var password : String) {
+    constructor(passwordPolicy: List<String>): this (
+        minimumQty = passwordPolicy[0].toInt(),
+        maximumQty = passwordPolicy[1].toInt(),
+        character = passwordPolicy[2].toCharArray()[0],
+        password = passwordPolicy[3]
+    )
+
     fun isValid(): Boolean {
         val passwordBreakdown = getBreakdown()
         return passwordBreakdown.containsKey(character)
-                && passwordBreakdown.get(character)!! >= minimumQty
-                && passwordBreakdown.get(character)!! <= maximumQty
+                && passwordBreakdown[character]!! >= minimumQty
+                && passwordBreakdown[character]!! <= maximumQty
     }
 
     fun getBreakdown(): MutableMap<Char, Int> {
         return password.fold(mutableMapOf(), { acc, letter ->
-            if (acc.get(letter) == null) {
-                acc.put(letter, 1)
+            if (acc[letter] == null) {
+                acc[letter] = 1
             } else {
-                val existingValue = acc.get(letter)
-                acc.set(letter, existingValue!! + 1)
+                acc[letter] = acc[letter]!! + 1
             }
             acc
         })
     }
+
 }
 
 
