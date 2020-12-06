@@ -1,6 +1,7 @@
 import utils.cleansePassportsToList
 import day4.convertPassportListToMap
 import day4.countValidPassports
+import utils.readInPassportFile
 import java.io.File
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -8,18 +9,18 @@ import kotlin.test.assertEquals
 
 class PassportVerifierTest {
     private var mappedData = listOf<Map<String, String>>()
+    private var mappedData2 = listOf<Map<String, String>>()
 
     @BeforeTest fun setup() {
         var cleansedData = mutableListOf<String>()
-        File("./src/main/data/PassportsSample.txt").forEachLine {
-            if (it == "") {
-                cleansedData.add("NEWLINE!!")
-            } else {
-                cleansedData.add(it)
-            }
-        }
+        readInPassportFile("./src/main/data/PassportsSample.txt", cleansedData)
         val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
         mappedData = convertPassportListToMap(splitData)
+
+        var cleansedData2 = mutableListOf<String>()
+        readInPassportFile("./src/main/data/PassportsSample2.txt", cleansedData2)
+        val splitData2 = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
+        mappedData2 = convertPassportListToMap(splitData2)
     }
 
     @Test fun `There are four lights`() {
@@ -32,5 +33,9 @@ class PassportVerifierTest {
 
     @Test fun `Can count valid passport entries`() {
         assertEquals(2, countValidPassports(mappedData))
+    }
+
+    @Test fun `Can count valid passports with valid data`() {
+
     }
 }
