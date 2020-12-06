@@ -1,3 +1,5 @@
+import utils.cleansePassportsToList
+import utils.convertPassportListToMap
 import java.io.File
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -16,7 +18,7 @@ class PassportVerifierTest {
             }
         }
 
-        data = data.joinToString().replace(",", "").split(" NEWLINE!! ").toMutableList()
+        data = cleansePassportsToList(data, " NEWLINE!! ")
     }
 
     @Test fun `There are four lights`() {
@@ -26,10 +28,7 @@ class PassportVerifierTest {
     @Test fun `Can convert to map`() {
         val splitData = data.map { word -> word.split(" ")}
 
-        splitData.forEach {
-            val mapValue = it.associate { it.substringBefore(":") to it.substringAfter(":") }
-            mappedData.add(mapValue)
-        }
+        convertPassportListToMap(splitData, mappedData)
 
         assertEquals(mapOf("eyr" to "2020"), mappedData.first().filterKeys { it == "eyr" })
     }
