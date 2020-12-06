@@ -1,6 +1,9 @@
 import day2.PasswordChecker
 import day1.ExpenseCalc
 import day3.tobogganTraversal
+import day4.convertPassportListToMap
+import day4.countValidPassports
+import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
 
@@ -50,5 +53,17 @@ fun main(args: Array<String>) {
     println("Day 3 Part 2 - $tobogganTraversalPt2")
 
 
+    var cleansedData = mutableListOf<String>()
+    File("./src/main/data/Passports.txt").forEachLine {
+        if (it == "") {
+            cleansedData.add("NEWLINE!!")
+        } else {
+            cleansedData.add(it)
+        }
+    }
+    val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
+    val mappedData = convertPassportListToMap(splitData)
+
+    println("Day 4 Part 1 - " + countValidPassports(mappedData))
 
 }
