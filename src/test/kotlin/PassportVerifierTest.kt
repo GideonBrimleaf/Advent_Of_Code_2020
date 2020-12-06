@@ -1,8 +1,8 @@
-import utils.cleansePassportsToList
 import day4.convertPassportListToMap
 import day4.countValidPassports
+import day4.countValidPassportsAndValidData
+import utils.cleansePassportsToList
 import utils.readInPassportFile
-import java.io.File
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -36,6 +36,6 @@ class PassportVerifierTest {
     }
 
     @Test fun `Can count valid passports with valid data`() {
-
+        assertEquals(4, countValidPassportsAndValidData(mappedData2))
     }
 }
