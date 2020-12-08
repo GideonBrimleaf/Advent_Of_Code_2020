@@ -1,6 +1,6 @@
 import day4.*
 import utils.cleansePassportsToList
-import utils.readInPassportFile
+import utils.readInMultiLineFile
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,12 +13,12 @@ class PassportVerifierTest {
 
     @BeforeTest fun setup() {
         var cleansedData = mutableListOf<String>()
-        readInPassportFile("./src/main/data/PassportsSample.txt", cleansedData)
+        readInMultiLineFile("./src/main/data/PassportsSample.txt", cleansedData)
         val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
         mappedData = convertPassportListToMap(splitData)
 
         var cleansedData2 = mutableListOf<String>()
-        readInPassportFile("./src/main/data/PassportsSample2.txt", cleansedData2)
+        readInMultiLineFile("./src/main/data/PassportsSample2.txt", cleansedData2)
         val splitData2 = cleansePassportsToList(cleansedData2, " NEWLINE!! ").map { word -> word.split(" ")}
         mappedData2 = convertPassportListToMap(splitData2)
 

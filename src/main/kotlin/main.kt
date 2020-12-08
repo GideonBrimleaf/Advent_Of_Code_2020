@@ -5,10 +5,13 @@ import day4.convertPassportListToMap
 import day4.countValidPassports
 import day4.countValidPassportsAndValidData
 import day5.SeatLocator
+import day6.getDistinctAnswers
+import day6.getSumOfDistinctAnswers
 import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
-import utils.readInPassportFile
+import utils.cleanseQuestionnaireToList
+import utils.readInMultiLineFile
 
 fun main(args: Array<String>) {
     val expenseData = mutableListOf<Int>()
@@ -56,7 +59,7 @@ fun main(args: Array<String>) {
     println("Day 3 Part 2 - $tobogganTraversalPt2")
 
     var cleansedData = mutableListOf<String>()
-    readInPassportFile("./src/main/data/Passports.txt", cleansedData)
+    readInMultiLineFile("./src/main/data/Passports.txt", cleansedData)
     val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
     val mappedData = convertPassportListToMap(splitData)
 
@@ -79,6 +82,17 @@ fun main(args: Array<String>) {
         seatIds.add(it.getSeatId(seatRow, seatColumn))
     }
 
-    println("Day 5 Part 2 - " + seatIds.maxOrNull())
+    println("Day 5 Part 1 - " + seatIds.maxOrNull())
+
+    val allPossibleSeatIds = IntArray(seatIds.size - seatIds.minOrNull()!!) {it + seatIds.minOrNull()!!}.toMutableList()
+    println("Day 5 Part 2 - " + allPossibleSeatIds.minus(seatIds).first())
+
+
+    var cleansedQuestionnaireData = mutableListOf<String>()
+    readInMultiLineFile("./src/main/data/Questionnaire.txt", cleansedQuestionnaireData)
+    val splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
+    val distinctAnswers = getDistinctAnswers(splitQuestionnaireData)
+
+    println("Day 6 Part 1 - " + getSumOfDistinctAnswers(distinctAnswers))
 
 }
