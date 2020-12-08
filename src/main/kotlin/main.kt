@@ -4,6 +4,7 @@ import day3.tobogganTraversal
 import day4.convertPassportListToMap
 import day4.countValidPassports
 import day4.countValidPassportsAndValidData
+import day5.SeatLocator
 import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
@@ -62,6 +63,22 @@ fun main(args: Array<String>) {
     println("Day 4 Part 1 - " + countValidPassports(mappedData))
     println("Day 4 Part 2 - " + countValidPassportsAndValidData(mappedData))
 
+    var seatData = mutableListOf<SeatLocator>()
+    var seatIds = mutableListOf<Int>()
+    val planeColumns = IntArray(8) {it}.toMutableList()
+    val planeRows = IntArray(128) {it}.toMutableList()
 
+
+    File("./src/main/data/Seats.txt").forEachLine {
+        seatData.add(SeatLocator(it))
+    }
+
+    seatData.forEach {
+        val seatRow = it.calculatePosition("row", planeRows)
+        val seatColumn = it.calculatePosition("column", planeColumns)
+        seatIds.add(it.getSeatId(seatRow, seatColumn))
+    }
+
+    println("Day 5 Part 2 - " + seatIds.maxOrNull())
 
 }
