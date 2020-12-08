@@ -3,6 +3,7 @@ import day1.ExpenseCalc
 import day3.tobogganTraversal
 import day4.convertPassportListToMap
 import day4.countValidPassports
+import day4.countValidPassportsAndValidData
 import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
@@ -59,5 +60,8 @@ fun main(args: Array<String>) {
     val mappedData = convertPassportListToMap(splitData)
 
     println("Day 4 Part 1 - " + countValidPassports(mappedData))
+    println("Day 4 Part 2 - " + countValidPassportsAndValidData(mappedData))
+
+
 
 }
