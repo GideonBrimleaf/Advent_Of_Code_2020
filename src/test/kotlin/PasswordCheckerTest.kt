@@ -8,7 +8,7 @@ class PasswordCheckerTest {
 
     @Test fun `Can Break Down Password`() {
         val password = PasswordChecker(4, 5, 'a', "abcdd")
-        assertEquals(mutableMapOf('a' to 1, 'b' to 1, 'c' to 1, 'd' to 2), password.getBreakdown())
+        assertEquals(mutableMapOf('a' to 1, 'b' to 1, 'c' to 1, 'd' to 2), password.getBreakdown(password.password))
     }
 
     @Test fun `Can Check Against Policy`() {
