@@ -6,6 +6,8 @@ import day4.countValidPassports
 import day4.countValidPassportsAndValidData
 import day5.SeatLocator
 import day6.getDistinctAnswers
+import day6.getGroupedAnswers
+import day6.getSumOfAllYesAnswers
 import day6.getSumOfDistinctAnswers
 import utils.cleansePassportsToList
 import java.io.File
@@ -92,7 +94,9 @@ fun main(args: Array<String>) {
     readInMultiLineFile("./src/main/data/Questionnaire.txt", cleansedQuestionnaireData)
     val splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
     val distinctAnswers = getDistinctAnswers(splitQuestionnaireData)
+    val groupedAnswers = getGroupedAnswers(cleansedQuestionnaireData)
 
     println("Day 6 Part 1 - " + getSumOfDistinctAnswers(distinctAnswers))
+    println("Day 6 Part 2 - " + getSumOfAllYesAnswers(groupedAnswers, splitQuestionnaireData))
 
 }

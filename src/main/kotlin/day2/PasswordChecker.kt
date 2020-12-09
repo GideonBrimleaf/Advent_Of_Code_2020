@@ -1,9 +1,8 @@
 package day2
 
 import utils.Breakdownable
-import utils.DataBreakdown
 
-class PasswordChecker(private val minimumQty: Int, private val maximumQty : Int, private val character : Char, val password : String): Breakdownable by DataBreakdown {
+class PasswordChecker(private val minimumQty: Int, private val maximumQty : Int, private val character : Char, val password : String): Breakdownable by Breakdownable.DataBreakdown {
     constructor(passwordPolicy: List<String>): this (
         minimumQty = passwordPolicy[0].toInt(),
         maximumQty = passwordPolicy[1].toInt(),
