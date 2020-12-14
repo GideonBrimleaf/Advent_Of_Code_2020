@@ -62,18 +62,6 @@ class BagRegulatorTest {
         "dotted black" to mapOf()
     )
 
-    private var bagCount = mutableMapOf(
-        "light red" to 3,
-        "dark orange" to 7,
-        "bright white" to 1,
-        "muted yellow" to 11,
-        "shiny gold" to 3,
-        "dark olive" to 7,
-        "vibrant plum" to 11,
-        "faded blue" to 0,
-        "dotted black" to 0
-    )
-
     private var partTwoBags = mapOf(
         "shiny gold" to mapOf("dark red" to 2),
         "dark red" to mapOf("dark orange" to 2),
@@ -84,16 +72,6 @@ class BagRegulatorTest {
         "dark violet" to mapOf()
     )
 
-    private var partTwoBagCount = mapOf(
-        "shiny gold" to 2,
-        "dark red" to 2,
-        "dark orange" to 2,
-        "dark yellow" to 2,
-        "dark green" to 2,
-        "dark blue" to 2,
-        "dark violet" to 0
-    )
-
     private var jumbledBags = mapOf(
         "dim crimson" to mapOf(),
         "light violet" to mapOf("dim crimson" to 3, "drab brown" to 2),
@@ -102,51 +80,39 @@ class BagRegulatorTest {
         "drab brown" to mapOf()
     )
 
-    private var jumbledBagCount = mapOf(
-        "wavy green" to 2,
-        "drab brown" to 0,
-        "light violet" to 5,
-        "dim crimson" to 0,
-        "shiny gold" to 4
-    )
-
-    @Test fun `Can create a map` () {
-        assertEquals(referentialBagsPt1, toReferentialBags(bagsPt1))
-    }
+//    @Test fun `Can create a map` () {
+//        assertEquals(referentialBagsPt1, toReferentialBags(bagsPt1))
+//    }
 
     @Test fun `Can create truthy map` () {
-        assertEquals(truthyBagsPt1, toTruthyBags(referentialBagsPt1))
+        assertEquals(truthyBagsPt1, toTruthyBags(referentialBagsPt2))
     }
 
-    @Test fun `Can count number of possible bags that can have a gold bag` () {
-        assertEquals(4, countValidExternalBags(truthyBagsPt1, referentialBagsPt1))
+//    @Test fun `Can count number of possible bags that can have a gold bag` () {
+//        assertEquals(4, countValidExternalBags(truthyBagsPt1, referentialBagsPt1))
+//    }
+
+    @Test fun `Can count possible gold bag containing bags` () {
+        assertEquals(4, countValidExternalBags2(truthyBagsPt1, referentialBagsPt2))
     }
 
     @Test fun `Can create map of bag quantities` () {
         assertEquals(referentialBagsPt2, toBagQuantityData(bagsPt1))
     }
 
-    @Test fun `Can create map of bag counts` () {
-        assertEquals(bagCount, toBagCount(referentialBagsPt2))
-    }
-
     @Test fun `Can create bag quantity map from nested data` () {
         assertEquals(partTwoBags, toBagQuantityData(bagsPt2))
     }
 
-    @Test fun `Can create bag counts from nested data` () {
-        assertEquals(partTwoBagCount, toBagCount(partTwoBags))
-    }
-
     @Test fun `Can count number of bags required in gold bag` () {
-        assertEquals(32, countValidInternalBags("shiny gold", toBagCount(referentialBagsPt2), toBagQuantityData(bagsPt1)))
+        assertEquals(32, countValidInternalBags("shiny gold", toBagQuantityData(bagsPt1)))
     }
 
     @Test fun `Can calculate multiple depth of bags` () {
-        assertEquals(126, countValidInternalBags("shiny gold", toBagCount(partTwoBags), toBagQuantityData(bagsPt2)))
+        assertEquals(126, countValidInternalBags("shiny gold", toBagQuantityData(bagsPt2)))
     }
 
     @Test fun `Can calculate complex nested bags` () {
-        assertEquals(52, countValidInternalBags("shiny gold", jumbledBagCount, jumbledBags ))
+        assertEquals(52, countValidInternalBags("shiny gold", jumbledBags ))
     }
 }

@@ -1,7 +1,5 @@
 package day7
 
-import kotlin.math.pow
-
 fun toReferentialBags(bagList: List<String>): Map<String, String> {
     return bagList.map {
         it.split(" ")
@@ -10,9 +8,9 @@ fun toReferentialBags(bagList: List<String>): Map<String, String> {
     }
 }
 
-fun toTruthyBags(bagData: Map<String, String>): MutableMap<String, Boolean> {
+fun toTruthyBags(bagData: Map<String, Map<String, Int?>>): MutableMap<String, Boolean> {
     return bagData.mapValues {
-        it.value.contains("shiny gold")
+        it.value.keys.contains("shiny gold")
     }.toMutableMap()
 }
 
@@ -41,16 +39,6 @@ fun toBagQuantityData(bagList: List<String>): Map<String, Map<String, Int?>> {
     }
 }
 
-fun toBagCount(bagQuantities: Map<String, Map<String, Int?>>): Map<String, Int> {
-    return bagQuantities.entries.associate { it ->
-        if (it.value.isNotEmpty()) {
-            it.key to it.value.map { it.value }.sumOf { it!! }
-        } else {
-            it.key to 0
-        }
-    }
-}
-
 fun countValidExternalBags(truthyBagList: MutableMap<String,Boolean>, referentialBagList: Map<String, String>): Int {
     repeat(truthyBagList.size) {
         truthyBagList.forEach { (bagKey, associatedBags) ->
@@ -66,15 +54,22 @@ fun countValidExternalBags(truthyBagList: MutableMap<String,Boolean>, referentia
     return truthyBagList.count { it.value }
 }
 
-fun countValidInternalBags(
-    startPoint : String,
-    bagQuantities: Map<String, Int>,
-    referentialBagList: Map<String, Map<String, Int?>>
-): Int {
-    return bagCounter2(startPoint, referentialBagList)
+fun countValidExternalBags2(truthyBagList: MutableMap<String,Boolean>, referentialBagList: Map<String, Map<String, Int?>>): Int {
+    repeat(truthyBagList.size) {
+        truthyBagList.forEach { (bagKey, associatedBags) ->
+            if (associatedBags) {
+                referentialBagList.forEach { (bag, bags) ->
+                    if (bags.keys.contains(bagKey)) {
+                        truthyBagList[bag] = true
+                    }
+                }
+            }
+        }
+    }
+    return truthyBagList.count { it.value }
 }
 
-fun bagCounter2(
+fun countValidInternalBags(
     startPoint : String,
     referentialBagList: Map<String, Map<String, Int?>>,
     parentBagQty: Int = 1
@@ -83,7 +78,7 @@ fun bagCounter2(
     referentialBagList[startPoint]!!.forEach { (bagType, bagQty) ->
         runningTotal += bagQty!! * parentBagQty
         if (referentialBagList[bagType]!!.isNotEmpty()) {
-            runningTotal += bagCounter2(bagType, referentialBagList, bagQty * parentBagQty)
+            runningTotal += countValidInternalBags(bagType, referentialBagList, bagQty * parentBagQty)
         }
     }
     return runningTotal
