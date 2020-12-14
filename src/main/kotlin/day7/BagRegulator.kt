@@ -71,40 +71,19 @@ fun countValidInternalBags(
     bagQuantities: Map<String, Int>,
     referentialBagList: Map<String, Map<String, Int?>>
 ): Int {
-//    val topLevelBagCount = referentialBagList[startPoint]!!.map { it.value }.sumBy { it!! }
-//    return topLevelBagCount + bagCounter(startPoint, bagQuantities, referentialBagList)
     return bagCounter2(startPoint, referentialBagList)
 }
-
-//fun bagCounter(
-//    startPoint : String,
-//    bagQuantities: Map<String, Int>,
-//    referentialBagList: Map<String, Map<String, Int?>>,
-//    counter:Int = 0,
-//    powerModifier:Int = 1
-//): Int {
-//    var newCount = counter
-//    referentialBagList[startPoint]!!.forEach { (bagKey, bagContents) ->
-//        newCount += bagQuantities[bagKey]!! * bagContents!!.toDouble().pow(powerModifier).toInt()
-//        if (referentialBagList[bagKey]!!.isNotEmpty()) {
-//            val powerLevel = powerModifier + 1
-//            newCount = bagCounter(bagKey, bagQuantities, referentialBagList, newCount, powerLevel)
-//        }
-//    }
-//    return newCount
-//}
 
 fun bagCounter2(
     startPoint : String,
     referentialBagList: Map<String, Map<String, Int?>>,
-    parentBagQty: Int = 1,
-    counter: Int = 0
+    parentBagQty: Int = 1
 ): Int {
-    var runningTotal = counter
+    var runningTotal = 0
     referentialBagList[startPoint]!!.forEach { (bagType, bagQty) ->
         runningTotal += bagQty!! * parentBagQty
         if (referentialBagList[bagType]!!.isNotEmpty()) {
-            runningTotal = bagCounter2(bagType, referentialBagList, bagQty * parentBagQty, runningTotal)
+            runningTotal += bagCounter2(bagType, referentialBagList, bagQty * parentBagQty)
         }
     }
     return runningTotal
