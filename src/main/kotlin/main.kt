@@ -9,6 +9,7 @@ import day6.getDistinctAnswers
 import day6.getGroupedAnswers
 import day6.getSumOfAllYesAnswers
 import day6.getSumOfDistinctAnswers
+import day7.*
 import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
@@ -98,5 +99,21 @@ fun main(args: Array<String>) {
 
     println("Day 6 Part 1 - " + getSumOfDistinctAnswers(distinctAnswers))
     println("Day 6 Part 2 - " + getSumOfAllYesAnswers(groupedAnswers, splitQuestionnaireData))
+
+    val bags = mutableListOf<String>()
+
+    File("./src/main/data/BagList.txt").forEachLine {
+        bags.add(it)
+    }
+
+    val referentialBags = toReferentialBags(bags)
+    val truthyBags = toTruthyBags(referentialBags)
+
+//    println("Day 7 Part 1 - " + countValidExternalBags(truthyBags, referentialBags))
+
+    val bagQuantities = toBagQuantityData(bags)
+    val bagCounts = toBagCount(bagQuantities)
+
+    println("Day 7 Part 2 - " + countValidInternalBags("shiny gold", bagCounts, bagQuantities))
 
 }
