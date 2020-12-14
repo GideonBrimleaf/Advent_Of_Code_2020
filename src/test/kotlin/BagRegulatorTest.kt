@@ -25,32 +25,7 @@ class BagRegulatorTest {
         "dark violet bags contain no other bags."
     )
 
-    private var referentialBagsPt1 = mutableMapOf(
-        "light red" to "bags contain 1 bright white bag 2 muted yellow bags.",
-        "dark orange" to "bags contain 3 bright white bags 4 muted yellow bags.",
-        "bright white" to "bags contain 1 shiny gold bag.",
-        "muted yellow" to "bags contain 2 shiny gold bags 9 faded blue bags.",
-        "shiny gold" to "bags contain 1 dark olive bag 2 vibrant plum bags.",
-        "dark olive" to "bags contain 3 faded blue bags 4 dotted black bags.",
-        "vibrant plum" to "bags contain 5 faded blue bags 6 dotted black bags.",
-        "faded blue" to "bags contain no other bags.",
-        "dotted black" to "bags contain no other bags."
-    )
-
-
-    private var truthyBagsPt1 = mutableMapOf(
-        "light red" to false,
-        "dark orange" to false,
-        "bright white" to true,
-        "muted yellow" to true,
-        "shiny gold" to false,
-        "dark olive" to false,
-        "vibrant plum" to false,
-        "faded blue" to false,
-        "dotted black" to false
-    )
-
-    private var referentialBagsPt2 = mutableMapOf(
+    private var referentialBags = mutableMapOf(
         "light red" to mapOf("bright white" to 1, "muted yellow" to 2),
         "dark orange" to mapOf("bright white" to 3, "muted yellow" to 4),
         "bright white" to mapOf("shiny gold" to 1),
@@ -60,6 +35,18 @@ class BagRegulatorTest {
         "vibrant plum" to mapOf("faded blue" to 5, "dotted black" to 6),
         "faded blue" to mapOf(),
         "dotted black" to mapOf()
+    )
+
+    private var truthyBags = mutableMapOf(
+        "light red" to false,
+        "dark orange" to false,
+        "bright white" to true,
+        "muted yellow" to true,
+        "shiny gold" to false,
+        "dark olive" to false,
+        "vibrant plum" to false,
+        "faded blue" to false,
+        "dotted black" to false
     )
 
     private var partTwoBags = mapOf(
@@ -80,28 +67,20 @@ class BagRegulatorTest {
         "drab brown" to mapOf()
     )
 
-//    @Test fun `Can create a map` () {
-//        assertEquals(referentialBagsPt1, toReferentialBags(bagsPt1))
-//    }
-
-    @Test fun `Can create truthy map` () {
-        assertEquals(truthyBagsPt1, toTruthyBags(referentialBagsPt2))
-    }
-
-//    @Test fun `Can count number of possible bags that can have a gold bag` () {
-//        assertEquals(4, countValidExternalBags(truthyBagsPt1, referentialBagsPt1))
-//    }
-
-    @Test fun `Can count possible gold bag containing bags` () {
-        assertEquals(4, countValidExternalBags2(truthyBagsPt1, referentialBagsPt2))
-    }
-
     @Test fun `Can create map of bag quantities` () {
-        assertEquals(referentialBagsPt2, toBagQuantityData(bagsPt1))
+        assertEquals(referentialBags, toBagQuantityData(bagsPt1))
     }
 
     @Test fun `Can create bag quantity map from nested data` () {
         assertEquals(partTwoBags, toBagQuantityData(bagsPt2))
+    }
+
+    @Test fun `Can create truthy map` () {
+        assertEquals(truthyBags, toTruthyBags(referentialBags))
+    }
+
+    @Test fun `Can count possible gold bag containing bags` () {
+        assertEquals(4, countValidExternalBags1(truthyBags, referentialBags))
     }
 
     @Test fun `Can count number of bags required in gold bag` () {

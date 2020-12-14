@@ -106,13 +106,10 @@ fun main(args: Array<String>) {
         bags.add(it)
     }
 
-    val referentialBags = toReferentialBags(bags)
     val bagQuantities = toBagQuantityData(bags)
     val truthyBags = toTruthyBags(bagQuantities)
 
-
-
-    println("Day 7 Part 1 - " + countValidExternalBags2(truthyBags, bagQuantities))
+    println("Day 7 Part 1 - " + countValidExternalBags1(truthyBags, bagQuantities))
     println("Day 7 Part 2 - " + countValidInternalBags("shiny gold", bagQuantities))
 
 }
