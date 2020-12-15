@@ -1,5 +1,6 @@
-import day2.PasswordChecker
+
 import day1.ExpenseCalc
+import day2.PasswordChecker
 import day3.tobogganTraversal
 import day4.convertPassportListToMap
 import day4.countValidPassports
@@ -9,10 +10,15 @@ import day6.getDistinctAnswers
 import day6.getGroupedAnswers
 import day6.getSumOfAllYesAnswers
 import day6.getSumOfDistinctAnswers
-import day7.*
+import day7.countValidExternalBags1
+import day7.countValidInternalBags
+import day7.toBagQuantityData
+import day7.toTruthyBags
 import day8.deLoop
 import day8.infiniteLoopCounter
 import day8.pairData
+import day9.findOddOneOut
+import day9.findOddOneOutComponents
 import utils.*
 import java.io.File
 
@@ -111,5 +117,13 @@ fun main(args: Array<String>) {
 
     val nonLoopingData = deLoop(transformedBootInstructions)
     println("Day 8 Part 2 - " + infiniteLoopCounter(nonLoopingData))
+
+    val xmasCodeData =  fileToMutableList("./src/main/data/XmasCode.txt").map { it.toLong() }
+    val oddOneOut = findOddOneOut(xmasCodeData, 25)
+    println("Day 9 Part 1 - $oddOneOut")
+
+    val oddOneOutComponents = findOddOneOutComponents(xmasCodeData, oddOneOut!!)
+    val totalForOddOneOutComponents = oddOneOutComponents.maxOrNull()?.plus(oddOneOutComponents.minOrNull()!!)
+    println("Day 9 Part 2 - $totalForOddOneOutComponents")
 
 }

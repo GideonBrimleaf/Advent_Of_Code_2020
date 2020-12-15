@@ -49,5 +49,6 @@
     </orderEntry>
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime (2)" level="project" />
+    <orderEntry type="library" name="combinatoricskt-1.6.0" level="application" />
   </component>
 </module>
