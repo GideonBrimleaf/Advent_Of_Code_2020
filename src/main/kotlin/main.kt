@@ -13,11 +13,8 @@ import day7.*
 import day8.deLoop
 import day8.infiniteLoopCounter
 import day8.pairData
-import utils.cleansePassportsToList
+import utils.*
 import java.io.File
-import utils.cleansePassword
-import utils.cleanseQuestionnaireToList
-import utils.readInMultiLineFile
 
 fun main(args: Array<String>) {
     val expenseData = mutableListOf<Int>()
@@ -47,11 +44,7 @@ fun main(args: Array<String>) {
 
     println("Day 2 Part 2 - " + passwordDataPt2.filter { result -> result }.size)
 
-    val tobogganTraversalPt1 = mutableListOf<String>()
-
-    File("./src/main/data/TreeMap.txt").forEachLine {
-        tobogganTraversalPt1.add(it)
-    }
+    val tobogganTraversalPt1 = fileToMutableList("./src/main/data/TreeMap.txt")
 
     println("Day 3 Part 1 - " + tobogganTraversal(tobogganTraversalPt1, 3, 1))
 
@@ -103,11 +96,7 @@ fun main(args: Array<String>) {
     println("Day 6 Part 1 - " + getSumOfDistinctAnswers(distinctAnswers))
     println("Day 6 Part 2 - " + getSumOfAllYesAnswers(groupedAnswers, splitQuestionnaireData))
 
-    val bags = mutableListOf<String>()
-
-    File("./src/main/data/BagList.txt").forEachLine {
-        bags.add(it)
-    }
+    val bags = fileToMutableList("./src/main/data/BagList.txt")
 
     val bagQuantities = toBagQuantityData(bags)
     val truthyBags = toTruthyBags(bagQuantities)
@@ -115,11 +104,7 @@ fun main(args: Array<String>) {
     println("Day 7 Part 1 - " + countValidExternalBags1(truthyBags, bagQuantities))
     println("Day 7 Part 2 - " + countValidInternalBags("shiny gold", bagQuantities))
 
-    val bootInstructions = mutableListOf<String>()
-
-    File("./src/main/data/Instructions.txt").forEachLine {
-        bootInstructions.add(it)
-    }
+    val bootInstructions = fileToMutableList("./src/main/data/Instructions.txt")
 
     val transformedBootInstructions = pairData(bootInstructions)
     println("Day 8 Part 1 - " + infiniteLoopCounter(transformedBootInstructions))
