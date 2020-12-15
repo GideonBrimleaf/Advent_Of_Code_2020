@@ -10,6 +10,8 @@ import day6.getGroupedAnswers
 import day6.getSumOfAllYesAnswers
 import day6.getSumOfDistinctAnswers
 import day7.*
+import day8.infiniteLoopCounter
+import day8.pairData
 import utils.cleansePassportsToList
 import java.io.File
 import utils.cleansePassword
@@ -111,5 +113,16 @@ fun main(args: Array<String>) {
 
     println("Day 7 Part 1 - " + countValidExternalBags1(truthyBags, bagQuantities))
     println("Day 7 Part 2 - " + countValidInternalBags("shiny gold", bagQuantities))
+
+    val bootInstructions = mutableListOf<String>()
+
+    File("./src/main/data/Instructions.txt").forEachLine {
+        bootInstructions.add(it)
+    }
+
+    val transformedBootInstructions = pairData(bootInstructions)
+    println("Day 8 Part 1 - " + infiniteLoopCounter(transformedBootInstructions))
+
+
 
 }
