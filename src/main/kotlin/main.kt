@@ -10,6 +10,7 @@ import day6.getGroupedAnswers
 import day6.getSumOfAllYesAnswers
 import day6.getSumOfDistinctAnswers
 import day7.*
+import day8.deLoop
 import day8.infiniteLoopCounter
 import day8.pairData
 import utils.cleansePassportsToList
@@ -123,6 +124,7 @@ fun main(args: Array<String>) {
     val transformedBootInstructions = pairData(bootInstructions)
     println("Day 8 Part 1 - " + infiniteLoopCounter(transformedBootInstructions))
 
-
+    val nonLoopingData = deLoop(transformedBootInstructions)
+    println("Day 8 Part 2 - " + infiniteLoopCounter(nonLoopingData))
 
 }
