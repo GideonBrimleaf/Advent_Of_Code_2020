@@ -1,7 +1,7 @@
 package day1
 
-class ExpenseCalc(val expenses : MutableList<Int>) {
-    fun calculate(target: Int, listToIterate : MutableList<Int>): Int {
+class ExpenseCalc(val expenses : List<Int>) {
+    fun calculate(target: Int, listToIterate : List<Int>): Int {
         return listToIterate.fold(0, {acc, num ->
             val remainder = target - num
             if (listToIterate.contains(remainder)) {

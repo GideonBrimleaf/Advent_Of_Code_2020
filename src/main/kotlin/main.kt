@@ -20,32 +20,23 @@ import day8.pairData
 import day9.findOddOneOut
 import day9.findOddOneOutComponents
 import utils.*
-import java.io.File
 
 fun main(args: Array<String>) {
-    val expenseData = mutableListOf<Int>()
-
-    File("./src/main/data/ExpenseCalc.txt").forEachLine {
-        expenseData.add(it.toInt())
-    }
+    val expenseData = fileToMutableList("./src/main/data/ExpenseCalc.txt").map { it.toInt() }
 
     val calculator = ExpenseCalc(expenseData)
 
     println("Day 1 Part 1 - " + calculator.calculate(2020, calculator.expenses))
     println("Day 1 Part 2 - " + calculator.calculateThrees(2020))
 
-    val passwordData = mutableListOf<Boolean>()
-
-    File("./src/main/data/Passwords.txt").forEachLine {
-        passwordData.add(PasswordChecker(cleansePassword(it)).isValidPart1())
+    val passwordData = fileToMutableList("./src/main/data/Passwords.txt").map {
+        PasswordChecker(cleansePassword(it)).isValidPart1()
     }
 
     println("Day 2 Part 1 - " + passwordData.filter { result -> result }.size)
 
-    val passwordDataPt2 = mutableListOf<Boolean>()
-
-    File("./src/main/data/Passwords.txt").forEachLine {
-        passwordDataPt2.add(PasswordChecker(cleansePassword(it)).isValidPart2())
+    val passwordDataPt2 = fileToMutableList("./src/main/data/Passwords.txt").map {
+        PasswordChecker(cleansePassword(it)).isValidPart2()
     }
 
     println("Day 2 Part 2 - " + passwordDataPt2.filter { result -> result }.size)
@@ -71,20 +62,17 @@ fun main(args: Array<String>) {
     println("Day 4 Part 1 - " + countValidPassports(mappedData))
     println("Day 4 Part 2 - " + countValidPassportsAndValidData(mappedData))
 
-    var seatData = mutableListOf<SeatLocator>()
-    var seatIds = mutableListOf<Int>()
+    val seatData = fileToMutableList("./src/main/data/Seats.txt").map {
+        SeatLocator(it)
+    }
+
     val planeColumns = IntArray(8) {it}.toMutableList()
     val planeRows = IntArray(128) {it}.toMutableList()
 
-
-    File("./src/main/data/Seats.txt").forEachLine {
-        seatData.add(SeatLocator(it))
-    }
-
-    seatData.forEach {
+    val seatIds = seatData.map {
         val seatRow = it.calculatePosition("row", planeRows)
         val seatColumn = it.calculatePosition("column", planeColumns)
-        seatIds.add(it.getSeatId(seatRow, seatColumn))
+        it.getSeatId(seatRow, seatColumn)
     }
 
     println("Day 5 Part 1 - " + seatIds.maxOrNull())
@@ -93,8 +81,9 @@ fun main(args: Array<String>) {
     println("Day 5 Part 2 - " + allPossibleSeatIds.minus(seatIds).first())
 
 
-    var cleansedQuestionnaireData = mutableListOf<String>()
+    val cleansedQuestionnaireData = mutableListOf<String>()
     readInMultiLineFile("./src/main/data/Questionnaire.txt", cleansedQuestionnaireData)
+
     val splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
     val distinctAnswers = getDistinctAnswers(splitQuestionnaireData)
     val groupedAnswers = getGroupedAnswers(cleansedQuestionnaireData)
