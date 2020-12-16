@@ -55,7 +55,9 @@ fun main(args: Array<String>) {
     println("Day 3 Part 2 - $tobogganTraversalPt2")
 
     val cleansedData = readInMultiLineFile("./src/main/data/Passports.txt")
-    val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
+    val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map {
+            word -> word.split(" ")
+    }
     val mappedData = convertPassportListToMap(splitData)
 
     println("Day 4 Part 1 - " + countValidPassports(mappedData))
