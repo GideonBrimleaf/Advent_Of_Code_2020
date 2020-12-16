@@ -23,18 +23,18 @@ fun findOddOneOut(numbers: List<Long>, preamble: Int): Long? {
 
 fun findOddOneOutComponents(numbers: List<Long>, targetNumber:Long): List<Long> {
     var contiguousRangeToSum = mutableListOf<Long>()
+    val rangeToLoopOver = 0..numbers.size
 
-    for (startPoint in 0..numbers.size) {
-        for (number in numbers.subList(startPoint, numbers.size)) {
-            contiguousRangeToSum.add(number)
+    rangeToLoopOver.forEach banana@{ startPoint ->
+        numbers.subList(startPoint, numbers.size).forEach {
+            contiguousRangeToSum.add(it)
             if (contiguousRangeToSum.sum() == targetNumber) {
                 return contiguousRangeToSum
-            } else if (number > targetNumber) {
+            } else if (it > targetNumber) {
                 contiguousRangeToSum = mutableListOf()
-                break
+                return@banana
             }
         }
     }
-
     return contiguousRangeToSum
 }
