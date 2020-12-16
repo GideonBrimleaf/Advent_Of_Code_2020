@@ -12,13 +12,11 @@ class PassportVerifierTest {
     private lateinit var singleInvalidPassport: Map<String, String>
 
     @BeforeTest fun setup() {
-        var cleansedData = mutableListOf<String>()
-        readInMultiLineFile("./src/main/data/PassportsSample.txt", cleansedData)
+        val cleansedData = readInMultiLineFile("./src/main/data/PassportsSample.txt")
         val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
         mappedData = convertPassportListToMap(splitData)
 
-        var cleansedData2 = mutableListOf<String>()
-        readInMultiLineFile("./src/main/data/PassportsSample2.txt", cleansedData2)
+        val cleansedData2 = readInMultiLineFile("./src/main/data/PassportsSample2.txt")
         val splitData2 = cleansePassportsToList(cleansedData2, " NEWLINE!! ").map { word -> word.split(" ")}
         mappedData2 = convertPassportListToMap(splitData2)
 

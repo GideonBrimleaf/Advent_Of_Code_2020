@@ -1,5 +1,5 @@
+
 import day6.*
-import utils.Breakdownable
 import utils.cleanseQuestionnaireToList
 import utils.readInMultiLineFile
 import kotlin.test.BeforeTest
@@ -8,11 +8,10 @@ import kotlin.test.assertEquals
 
 class QuestionnaireCalculatorTest {
     private var splitQuestionnaireData = mutableListOf<String>()
-    private var cleansedQuestionnaireData = mutableListOf<String>()
+    private val cleansedQuestionnaireData = readInMultiLineFile("./src/main/data/QuestionnaireSample.txt")
     private var groupedQuestionnaires = listOf<List<String>>()
 
     @BeforeTest fun setup() {
-        readInMultiLineFile("./src/main/data/QuestionnaireSample.txt", cleansedQuestionnaireData)
         splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
         groupedQuestionnaires = getGroupedAnswers(cleansedQuestionnaireData)
     }

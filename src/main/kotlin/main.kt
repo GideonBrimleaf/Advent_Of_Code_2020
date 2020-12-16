@@ -54,8 +54,7 @@ fun main(args: Array<String>) {
 
     println("Day 3 Part 2 - $tobogganTraversalPt2")
 
-    var cleansedData = mutableListOf<String>()
-    readInMultiLineFile("./src/main/data/Passports.txt", cleansedData)
+    val cleansedData = readInMultiLineFile("./src/main/data/Passports.txt")
     val splitData = cleansePassportsToList(cleansedData, " NEWLINE!! ").map { word -> word.split(" ")}
     val mappedData = convertPassportListToMap(splitData)
 
@@ -80,10 +79,7 @@ fun main(args: Array<String>) {
     val allPossibleSeatIds = IntArray(seatIds.size - seatIds.minOrNull()!!) {it + seatIds.minOrNull()!!}.toMutableList()
     println("Day 5 Part 2 - " + allPossibleSeatIds.minus(seatIds).first())
 
-
-    val cleansedQuestionnaireData = mutableListOf<String>()
-    readInMultiLineFile("./src/main/data/Questionnaire.txt", cleansedQuestionnaireData)
-
+    val cleansedQuestionnaireData = readInMultiLineFile("./src/main/data/Questionnaire.txt")
     val splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
     val distinctAnswers = getDistinctAnswers(splitQuestionnaireData)
     val groupedAnswers = getGroupedAnswers(cleansedQuestionnaireData)
