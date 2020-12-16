@@ -45,7 +45,7 @@ fun main(args: Array<String>) {
 
     println("Day 3 Part 1 - " + tobogganTraversal(tobogganTraversalPt1, 3, 1))
 
-    val tobogganTraversalPt2 : Long =
+    val tobogganTraversalPt2 =
         tobogganTraversal(tobogganTraversalPt1, 1,1) *
             tobogganTraversal(tobogganTraversalPt1, 3,1) *
             tobogganTraversal(tobogganTraversalPt1, 5, 1) *
