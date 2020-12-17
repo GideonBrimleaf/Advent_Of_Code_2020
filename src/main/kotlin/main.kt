@@ -1,5 +1,6 @@
 
 import day1.ExpenseCalc
+import day10.getJoltDifferences
 import day2.PasswordChecker
 import day3.tobogganTraversal
 import day4.convertPassportListToMap
@@ -112,5 +113,10 @@ fun main(args: Array<String>) {
     val oddOneOutComponents = findOddOneOutComponents(xmasCodeData, oddOneOut!!)
     val totalForOddOneOutComponents = oddOneOutComponents.maxOrNull()?.plus(oddOneOutComponents.minOrNull()!!)
     println("Day 9 Part 2 - $totalForOddOneOutComponents")
+
+    val jolts = fileToList("./src/main/data/Jolts.txt").map { it.toInt() }
+    val joltDifferences = getJoltDifferences(jolts)
+
+    println("Day 10 Part 1 - " + (joltDifferences[1]?.times(joltDifferences[3] ?: 0)))
 
 }
