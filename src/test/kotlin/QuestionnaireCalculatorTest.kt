@@ -2,19 +2,13 @@
 import day6.*
 import utils.cleanseQuestionnaireToList
 import utils.readInMultiLineFile
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class QuestionnaireCalculatorTest {
-    private var splitQuestionnaireData = mutableListOf<String>()
     private val cleansedQuestionnaireData = readInMultiLineFile("./src/main/data/QuestionnaireSample.txt")
-    private var groupedQuestionnaires = listOf<List<String>>()
-
-    @BeforeTest fun setup() {
-        splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
-        groupedQuestionnaires = getGroupedAnswers(cleansedQuestionnaireData)
-    }
+    private val splitQuestionnaireData = cleanseQuestionnaireToList(cleansedQuestionnaireData, "NEWLINE!!")
+    private var groupedQuestionnaires = getGroupedAnswers(cleansedQuestionnaireData)
 
     @Test fun `Can get distinct list of letters`() {
         assertEquals(listOf("abc", "abc", "abc", "a", "b"), getDistinctAnswers(splitQuestionnaireData))

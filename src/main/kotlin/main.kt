@@ -22,26 +22,26 @@ import day9.findOddOneOutComponents
 import utils.*
 
 fun main(args: Array<String>) {
-    val expenseData = fileToMutableList("./src/main/data/ExpenseCalc.txt").map { it.toInt() }
+    val expenseData = fileToList("./src/main/data/ExpenseCalc.txt").map { it.toInt() }
 
     val calculator = ExpenseCalc(expenseData)
 
     println("Day 1 Part 1 - " + calculator.calculate(2020, calculator.expenses))
     println("Day 1 Part 2 - " + calculator.calculateThrees(2020))
 
-    val passwordData = fileToMutableList("./src/main/data/Passwords.txt").map {
+    val passwordData = fileToList("./src/main/data/Passwords.txt").map {
         PasswordChecker(cleansePassword(it)).isValidPart1()
     }
 
     println("Day 2 Part 1 - " + passwordData.filter { result -> result }.size)
 
-    val passwordDataPt2 = fileToMutableList("./src/main/data/Passwords.txt").map {
+    val passwordDataPt2 = fileToList("./src/main/data/Passwords.txt").map {
         PasswordChecker(cleansePassword(it)).isValidPart2()
     }
 
     println("Day 2 Part 2 - " + passwordDataPt2.filter { result -> result }.size)
 
-    val tobogganTraversalPt1 = fileToMutableList("./src/main/data/TreeMap.txt")
+    val tobogganTraversalPt1 = fileToList("./src/main/data/TreeMap.txt")
 
     println("Day 3 Part 1 - " + tobogganTraversal(tobogganTraversalPt1, 3, 1))
 
@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
     println("Day 4 Part 1 - " + countValidPassports(mappedData))
     println("Day 4 Part 2 - " + countValidPassportsAndValidData(mappedData))
 
-    val seatData = fileToMutableList("./src/main/data/Seats.txt").map {
+    val seatData = fileToList("./src/main/data/Seats.txt").map {
         SeatLocator(it)
     }
 
@@ -89,7 +89,7 @@ fun main(args: Array<String>) {
     println("Day 6 Part 1 - " + getSumOfDistinctAnswers(distinctAnswers))
     println("Day 6 Part 2 - " + getSumOfAllYesAnswers(groupedAnswers, splitQuestionnaireData))
 
-    val bags = fileToMutableList("./src/main/data/BagList.txt")
+    val bags = fileToList("./src/main/data/BagList.txt")
 
     val bagQuantities = toBagQuantityData(bags)
     val truthyBags = toTruthyBags(bagQuantities)
@@ -97,7 +97,7 @@ fun main(args: Array<String>) {
     println("Day 7 Part 1 - " + countValidExternalBags1(truthyBags, bagQuantities))
     println("Day 7 Part 2 - " + countValidInternalBags("shiny gold", bagQuantities))
 
-    val bootInstructions = fileToMutableList("./src/main/data/Instructions.txt")
+    val bootInstructions = fileToList("./src/main/data/Instructions.txt")
 
     val transformedBootInstructions = pairData(bootInstructions)
     println("Day 8 Part 1 - " + infiniteLoopCounter(transformedBootInstructions))
@@ -105,7 +105,7 @@ fun main(args: Array<String>) {
     val nonLoopingData = deLoop(transformedBootInstructions)
     println("Day 8 Part 2 - " + infiniteLoopCounter(nonLoopingData))
 
-    val xmasCodeData =  fileToMutableList("./src/main/data/XmasCode.txt").map { it.toLong() }
+    val xmasCodeData =  fileToList("./src/main/data/XmasCode.txt").map { it.toLong() }
     val oddOneOut = findOddOneOut(xmasCodeData, 25)
     println("Day 9 Part 1 - $oddOneOut")
 

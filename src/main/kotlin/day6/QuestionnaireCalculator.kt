@@ -2,13 +2,13 @@ package day6
 
 import utils.Breakdownable
 
-fun getGroupedAnswers(questionnaire: MutableList<String>): List<List<String>> {
+fun getGroupedAnswers(questionnaire: List<String>): List<List<String>> {
     return questionnaire.joinToString().split(" NEWLINE!!").map {
         it.removePrefix(", ").removeSuffix(",").split(",")
     }
 }
 
-fun getDistinctAnswers(questionnaire: MutableList<String>): List<String> {
+fun getDistinctAnswers(questionnaire: List<String>): List<String> {
     return questionnaire.map {
         it.split("").distinct().joinToString().replace(",", "").replace(" ", "")
     }

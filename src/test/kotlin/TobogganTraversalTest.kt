@@ -1,13 +1,11 @@
-import java.io.File
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import day3.tobogganTraversal
-import utils.fileToMutableList
+import utils.fileToList
 
 class TobogganTraversalTest() {
 
-    private val testData = fileToMutableList("./src/main/data/TreeMapSample2.txt")
+    private val testData = fileToList("./src/main/data/TreeMapSample2.txt")
 
     @Test fun `Can test sample data`() {
         assertEquals(11, testData.size)
