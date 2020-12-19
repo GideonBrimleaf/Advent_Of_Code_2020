@@ -1,6 +1,8 @@
 
 import day1.ExpenseCalc
+import day10.getDistinctCombinations
 import day10.getJoltDifferences
+import day10.joltListToMap
 import day2.PasswordChecker
 import day3.tobogganTraversal
 import day4.convertPassportListToMap
@@ -118,5 +120,8 @@ fun main(args: Array<String>) {
     val joltDifferences = getJoltDifferences(jolts)
 
     println("Day 10 Part 1 - " + (joltDifferences[1]?.times(joltDifferences[3] ?: 0)))
+
+    val mappedJolts = joltListToMap(jolts)
+    println("Day 10 Part 2 - " + getDistinctCombinations(mappedJolts))
 
 }
